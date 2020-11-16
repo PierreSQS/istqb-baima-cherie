@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>Demo iSTQB Baima</title>
-        <link rel="stylesheet"  th:href="@{/main.css}" />
+        <link rel="stylesheet"  th:href="@{/styles.css}" />
         <meta charset="utf-8" />
     </head>
     <body>
@@ -27,8 +27,13 @@
             </div>
             <br>            
             <!-- Use th:field to show *{lastName} -->
-            <label for="lastName">Last name:</label>
-            <input type="text" />
+            <div>
+            	<label for="lastName">Last name:</label>
+            	<div class="form-group">
+            		<input type="text"/>
+            		<span class="warn">XXXXXXX</span>            		
+            	</div>
+            </div>
             
             <div>
             	<label for="Sexe">Sexe:</label>
@@ -53,7 +58,7 @@
             <label for="balance">Balance (dollars):</label>
             <input type="text" size="17"/>
             <br>
-            
+                        
             <input type="submit" />
         </form>
     </body>
