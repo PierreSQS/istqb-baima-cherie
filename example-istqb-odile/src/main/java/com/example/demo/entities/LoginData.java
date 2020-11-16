@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
 import lombok.Data;
@@ -29,6 +30,7 @@ public class LoginData {
 	
 	private LocalDateTime loggedAt;
 	
+	@Min(0)
 	private int age;
 
 }

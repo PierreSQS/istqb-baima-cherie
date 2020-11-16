@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Demo iSTQB Baima</title>
+        <link rel="stylesheet"  th:href="@{/main.css}" />
+        <meta charset="utf-8" />
+    </head>
+    <body>
+        <h1>Demo iSTQB</h1>
+        <h2>Version 1.0.0</h2>
+        <!-- 
+            Set the action attribute to "/Login.html", and use
+            th:object to bind the ${XXXXXXXXXXXXXX} variable as the form-backing bean. 
+        -->
+        <form method="post" action="Login.html" th:object="${LoginData}">
+            <!-- Use th:field to set field 'id' here -->
+            <input type="hidden"/>
+
+            
+            <!-- Use th:field to show *{firstName} -->
+            <div>
+            	<label for="firstName">First name:</label>
+            	<div class="form-group">
+            		<input type="text"/>
+            		<span class="warn">XXXXXXX</span>            		
+            	</div>
+            </div>
+            <br>            
+            <!-- Use th:field to show *{lastName} -->
+            <label for="lastName">Last name:</label>
+            <input type="text" />
+            
+            <div>
+            	<label for="Sexe">Sexe:</label>
+            	<!-- Iterate on ${genders} -->
+            	<div class="radio">
+                	<!-- Use th:field to check *{gender} -->
+                	<input type="radio" />
+                	<label>Masculin</label>
+                </div>
+            </div>
+            
+            <div>
+            	<label for="paymentMethod">Payment method:</label>
+            	<!-- Use th:field to select *{paymentMethod} -->
+            	<select>
+                	<!-- Iterate on ${paymentMethods} -->
+                	<option>Credit card</option>
+            	</select>
+            </div>
+            
+            <!-- Use th:field to show *{balance} -->
+            <label for="balance">Balance (dollars):</label>
+            <input type="text" size="17"/>
+            <br>
+            
+            <input type="submit" />
+        </form>
+    </body>
+</html>
