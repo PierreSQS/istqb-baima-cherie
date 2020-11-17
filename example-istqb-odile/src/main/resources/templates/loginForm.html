@@ -21,8 +21,8 @@
             <div>
             	<label for="firstName">First name:</label>
             	<div class="form-group">
-            		<input type="text"/>
-            		<span class="warn">XXXXXXX</span>            		
+            		<input type="text" th:field="*{prenom}"/>
+            		<span class="warn" th:if="${#fields.hasErrors('prenom')}" th:errors="*{prenom}" >XXXXXXX</span>            		
             	</div>
             </div>
             <br>            
@@ -30,8 +30,8 @@
             <div>
             	<label for="lastName">Last name:</label>
             	<div class="form-group">
-            		<input type="text"/>
-            		<span class="warn" th:errors="*{nom}">XXXXXXX</span>           		
+            		<input type="text" th:field="*{nom}"/>
+            		<span class="warn" th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}">XXXXXXX</span>           		
             	</div>
             </div>
             

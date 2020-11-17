@@ -24,6 +24,9 @@ public class LoginData {
 	@Size(min = 5, max = 8)
 	private String nom;
 	
+	@Size(min = 5, max = 8)
+	private String prenom;
+	
 	@Column(name = "password")
 	@Size(min = 4, max = 6)
 	private String pwd;
