@@ -1,12 +1,10 @@
-package com.example.demo.utils.validation.validation;
+package com.example.demo.utils.validation;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
-
-import com.example.demo.utils.validation.LoginValidation;
 
 class LoginValidationTest {
 	
