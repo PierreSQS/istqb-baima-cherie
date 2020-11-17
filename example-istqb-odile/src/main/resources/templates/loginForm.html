@@ -12,7 +12,7 @@
             Set the action attribute to "/Login.html", and use
             th:object to bind the ${XXXXXXXXXXXXXX} variable as the form-backing bean. 
         -->
-        <form method="post" action="Login.html" th:object="${LoginData}">
+        <form action="#" method="post" th:action="@{/login}" th:object="${loginData}">
             <!-- Use th:field to set field 'id' here -->
             <input type="hidden"/>
 
@@ -31,7 +31,7 @@
             	<label for="lastName">Last name:</label>
             	<div class="form-group">
             		<input type="text"/>
-            		<span class="warn">XXXXXXX</span>            		
+            		<span class="warn" th:errors="*{nom}">XXXXXXX</span>           		
             	</div>
             </div>
             
