@@ -9,9 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.demo.entities.LoginData;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 @Controller
 public class LoginController {
 	
@@ -25,8 +22,10 @@ public class LoginController {
 		if (error.hasErrors()) {
 			return "loginForm";
 		}
-		log.info("redirecting to /loginSuccess");
-		return "redirect:/loginSuccess";
+
+		//Controller Variant1 b. Works but stays on @/login
+		// Not optimal in the reality. Normally a Redirect should occurs!!
+		return "loginSuccess";
 	}
 
 }
