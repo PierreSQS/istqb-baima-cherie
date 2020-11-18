@@ -6,12 +6,24 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.example.demo.entities.LoginData;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
-public class LoginController {
+public class LoginController implements WebMvcConfigurer{
 	
+	// for any redirection a Handler should be implemented
+	// this is a way to do it without a Handler-Method
+	@Override
+	public void addViewControllers(ViewControllerRegistry registry) {
+		registry.addViewController("/loginOk").setViewName("loginSuccess");
+	}
+
 	@GetMapping("/login")
 	public String showLoginForm(LoginData plogin) {
 		return "loginForm";
@@ -22,10 +34,9 @@ public class LoginController {
 		if (error.hasErrors()) {
 			return "loginForm";
 		}
-
-		//Controller Variant1 b. Works but stays on @/login
-		// Not optimal in the reality. Normally a Redirect should occurs!!
-		return "loginSuccess";
+		log.info("redirecting to /loginSuccess");
+		return "redirect:/loginOk";
 	}
 
 }
+
