@@ -10,7 +10,7 @@
         <h2>Version 1.0.0</h2>
         <!-- 
             Set the action attribute to "/Login.html", and use
-            th:object to bind the ${XXXXXXXXXXXXXX} variable as the form-backing bean. 
+            th:object to bind the ${loginData} variable as the form-backing bean. 
         -->
         <form action="#" method="post" th:action="@{/login}" th:object="${loginData}">
             <!-- Use th:field to set field 'id' here -->
@@ -32,6 +32,15 @@
             	<div class="form-group">
             		<input type="text" th:field="*{nom}"/>
             		<span class="warn" th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}">XXXXXXX</span>           		
+            	</div>
+            </div>
+            
+            <!-- Use th:field to show *{Age} -->
+            <div>
+            	<label for="Age">Age:</label>
+            	<div class="form-group">
+            		<input type="text" th:field="*{age}"/>
+            		<span class="warn" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">XXXXXXX</span>           		
             	</div>
             </div>
             
