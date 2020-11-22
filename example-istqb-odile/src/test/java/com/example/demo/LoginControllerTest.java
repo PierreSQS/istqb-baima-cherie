@@ -2,6 +2,7 @@ package com.example.demo;
 
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
@@ -53,6 +54,17 @@ class LoginControllerTest {
 			.andExpect(view().name("loginForm"))
 			.andExpect(model().attributeExists("loginData"));
 //			.andDo(print());
+	}
+	
+	// Why is this Test working without Params!?!?!? TO CHECK
+	@Test
+	void testSubmitLoginForm() throws Exception {
+		mockMvc.perform(post("/login"))
+//				.param("nom", "Odile"))
+			.andExpect(model().hasNoErrors())
+			.andExpect(status().is3xxRedirection())
+			.andExpect(view().name("redirect:/loginOk"))
+			.andDo(print());
 	}
 	
 	@Test
