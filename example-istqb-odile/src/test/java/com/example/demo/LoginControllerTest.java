@@ -70,9 +70,9 @@ class LoginControllerTest {
 	@Test
 	void testSubmitLoginFormWithParamsPASS() throws Exception {
 		mockMvc.perform(post("/login")
-				.param("nom", "Odile")
-				.param("nom", "Odile")
-				.param("nom", "Odile"))
+				.param("prenom", "Odile")
+				.param("nom", "Baima")
+				.param("age", "10"))
 			.andExpect(model().hasNoErrors())
 			.andExpect(status().is3xxRedirection())
 			.andExpect(view().name("redirect:/loginOk"))
