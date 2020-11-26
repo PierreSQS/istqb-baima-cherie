@@ -56,7 +56,8 @@ class LoginControllerTest {
 //			.andDo(print());
 	}
 	
-	// Why is this Test working without Params!?!?!? TO CHECK
+	// The test is working because there is no @Not empty
+	// validation on the fields
 	@Test
 	void testSubmitLoginForm() throws Exception {
 		mockMvc.perform(post("/login"))
