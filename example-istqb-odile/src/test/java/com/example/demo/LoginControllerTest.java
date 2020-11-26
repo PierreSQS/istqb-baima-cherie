@@ -59,9 +59,20 @@ class LoginControllerTest {
 	// The test is working because there is no @Not empty
 	// validation on the fields
 	@Test
-	void testSubmitLoginForm() throws Exception {
+	void testSubmitLoginFormWithoutParamsPASS() throws Exception {
 		mockMvc.perform(post("/login"))
-//				.param("nom", "Odile"))
+			.andExpect(model().hasNoErrors())
+			.andExpect(status().is3xxRedirection())
+			.andExpect(view().name("redirect:/loginOk"))
+			.andDo(print());
+		}
+
+	@Test
+	void testSubmitLoginFormWithParamsPASS() throws Exception {
+		mockMvc.perform(post("/login")
+				.param("nom", "Odile")
+				.param("nom", "Odile")
+				.param("nom", "Odile"))
 			.andExpect(model().hasNoErrors())
 			.andExpect(status().is3xxRedirection())
 			.andExpect(view().name("redirect:/loginOk"))
