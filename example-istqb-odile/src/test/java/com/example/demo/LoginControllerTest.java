@@ -51,8 +51,8 @@ class LoginControllerTest {
 	void testShowLoginForm() throws Exception {
 		mockMvc.perform(get("/login"))
 			.andExpect(status().isOk())
-			.andExpect(view().name("loginForm"))
-			.andExpect(model().attributeExists("loginData"));
+			.andExpect(model().attributeExists("loginData"))
+			.andExpect(view().name("loginForm"));
 //			.andDo(print());
 	}
 	
@@ -61,10 +61,10 @@ class LoginControllerTest {
 	@Test
 	void testSubmitLoginFormWithoutParamsPASS() throws Exception {
 		mockMvc.perform(post("/login"))
-			.andExpect(model().hasNoErrors())
 			.andExpect(status().is3xxRedirection())
-			.andExpect(view().name("redirect:/loginOk"))
-			.andDo(print());
+			.andExpect(model().hasNoErrors())
+			.andExpect(view().name("redirect:/loginOk"));
+//			.andDo(print());
 		}
 
 	@Test
@@ -73,9 +73,24 @@ class LoginControllerTest {
 				.param("prenom", "Odile")
 				.param("nom", "Baima")
 				.param("age", "10"))
-			.andExpect(model().hasNoErrors())
 			.andExpect(status().is3xxRedirection())
-			.andExpect(view().name("redirect:/loginOk"))
+			.andExpect(model().hasNoErrors())
+			.andExpect(view().name("redirect:/loginOk"));
+//			.andDo(print());
+	}
+	
+	@Test
+	void testSubmitLoginFormWithParamsFAIL() throws Exception {
+		mockMvc.perform(post("/login")
+				.param("prenom", "Odil")
+				.param("nom", "Baim")
+				.param("age", "-1"))
+			.andExpect(status().isOk())
+			.andExpect(model().hasErrors())
+			.andExpect(model().attributeHasFieldErrors("loginData", "nom"))
+			.andExpect(model().attributeHasFieldErrors("loginData", "prenom"))
+			.andExpect(model().attributeHasFieldErrors("loginData", "age"))
+			.andExpect(view().name("loginForm"))
 			.andDo(print());
 	}
 	
@@ -83,8 +98,8 @@ class LoginControllerTest {
 	void testShowHomeOrIndexPage() throws Exception {
 		mockMvc.perform(get("/"))
 			.andExpect(status().isOk())
-			.andExpect(view().name("index"))
-			.andExpect(content().string(containsString("Login Page")));
+			.andExpect(content().string(containsString("Login Page")))
+			.andExpect(view().name("index"));
 //			.andDo(print());
 	}
 
