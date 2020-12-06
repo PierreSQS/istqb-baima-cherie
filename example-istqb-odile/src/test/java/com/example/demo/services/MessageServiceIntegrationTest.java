@@ -12,7 +12,7 @@ import com.example.demo.domain.Message;
 import com.example.demo.entities.LoginData;
 import com.example.demo.utils.validation.LoginValidation;
 
-class MessageServiceTest {
+class MessageServiceIntegrationTest {
 	private LoginValidation fValidation;
 	
 //	@MockBean
