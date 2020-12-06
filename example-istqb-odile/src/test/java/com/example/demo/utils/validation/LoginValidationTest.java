@@ -2,9 +2,9 @@ package com.example.demo.utils.validation;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.time.LocalDateTime;
-
 import org.junit.jupiter.api.Test;
+
+import com.example.demo.domain.AgeStatus;
 
 class LoginValidationTest {
 	
@@ -16,9 +16,9 @@ class LoginValidationTest {
 	void testAgeValidation() {
 		validation = new LoginValidation();
 		
-		String recvMsg = validation.ageValidation("Pierrot", 8, LocalDateTime.now());
+		String recvMsg = validation.ageValidation(8);
 		
-		String expMsg = "Désolé votre âge ne vous permet pas d'acceder à ce site";
+		String expMsg = AgeStatus.MINEUR.toString();
 		
 		assertEquals(recvMsg,expMsg);
 	}

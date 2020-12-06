@@ -4,7 +4,6 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.domain.Message;
 import com.example.demo.entities.LoginData;
-import com.example.demo.persistence.LoginRepository;
 import com.example.demo.utils.validation.LoginValidation;
 
 @Service
@@ -12,12 +11,17 @@ public class MessageService {
 
 	private LoginValidation validation;
 
-	private LoginRepository loginRepo;
+//	private LoginRepository loginRepo;
+//
+//	public MessageService(LoginValidation validation, LoginRepository loginRepo) {
+//		super();
+//		this.validation = validation;
+//		this.loginRepo = loginRepo;
+//	}
 
-	public MessageService(LoginValidation validation, LoginRepository loginRepo) {
+	public MessageService(LoginValidation validation) {
 		super();
 		this.validation = validation;
-		this.loginRepo = loginRepo;
 	}
 
 	public Message getMessage(LoginData pLoginData) {

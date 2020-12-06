@@ -12,8 +12,10 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 @Entity
 @Table(name = "User")
 public class LoginData {
@@ -36,5 +38,10 @@ public class LoginData {
 	
 	@Min(0)
 	private int age;
+
+	public LoginData(@Min(0) int age) {
+		super();
+		this.age = age;
+	}
 
 }
