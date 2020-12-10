@@ -7,14 +7,10 @@ import com.example.demo.services.MessageService;
 import com.example.demo.utils.validation.LoginValidation;
 
 @Configuration 
-public class TestConfig { // The Class is Not in use now!!!!
-	
+public class TestConfig {	
 //	@Autowired
 	private LoginValidation validation;
 	
-//	@Autowired
-//	private LoginRepository loginRepo;
-
 	@Bean
 	public LoginValidation createLoginValidation() {
 		return new LoginValidation();
