@@ -26,6 +26,8 @@ public class MessageService {
 		this.loginRepo = loginRepo;
 	}
 
+	// This Constructor is just there to simplify
+	// the Unit-Test of this service
 	public MessageService(LoginValidation validation) {
 		super();
 		this.validation = validation;

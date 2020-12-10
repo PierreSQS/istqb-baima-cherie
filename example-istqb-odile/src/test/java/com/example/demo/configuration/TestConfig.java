@@ -8,8 +8,6 @@ import com.example.demo.utils.validation.LoginValidation;
 
 @Configuration 
 public class TestConfig {	
-//	@Autowired
-	private LoginValidation validation;
 	
 	@Bean
 	public LoginValidation createLoginValidation() {
@@ -18,7 +16,7 @@ public class TestConfig {
 
 	@Bean
 	public MessageService createMessageService() {
-		return new MessageService(validation);
+		return new MessageService(createLoginValidation());
 	}
 
 }
