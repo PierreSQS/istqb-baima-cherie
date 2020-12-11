@@ -5,32 +5,36 @@ import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.example.demo.configuration.TestConfig;
 import com.example.demo.domain.Message;
 import com.example.demo.entities.LoginData;
 import com.example.demo.persistence.LoginRepository;
+import com.example.demo.utils.validation.LoginValidation;
 
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = {TestConfig.class})
+@ExtendWith(MockitoExtension.class)
 class MessageServiceUnitTest {
 	
 	private LoginData fLoginData;
 	
-	@Autowired
+	@InjectMocks
 	private MessageService msgServTO;
 	
-	@Autowired
+	@Mock
 	private LoginRepository loginRepoMock;
+	
+	
+	@Mock
+	private LoginValidation loginValidation;
 
 	@Test
 	void testShouldReturnMessageXY() {
 		// Arrange
 		fLoginData = new LoginData(10);
 		when(loginRepoMock.save(fLoginData)).thenReturn(fLoginData);
+		when(loginValidation.ageValidation(fLoginData.getAge())).thenReturn("MINEUR");
 		
 		// Act
 		Message msg = msgServTO.getMessage(fLoginData);
