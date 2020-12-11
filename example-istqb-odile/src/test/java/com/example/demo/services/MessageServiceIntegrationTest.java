@@ -7,16 +7,19 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 
 import com.example.demo.domain.Message;
 import com.example.demo.entities.LoginData;
+import com.example.demo.persistence.LoginRepository;
 import com.example.demo.utils.validation.LoginValidation;
 
 class MessageServiceIntegrationTest {
+	
 	private LoginValidation fValidation;
 	
-//	@MockBean
-//	private LoginRepository fLoginRepo;
+	@Mock
+	private LoginRepository fLoginRepo;
 	
 	private MessageService fMsgServ;
 	
