@@ -7,13 +7,16 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.example.demo.domain.Message;
 import com.example.demo.entities.LoginData;
 import com.example.demo.persistence.LoginRepository;
 import com.example.demo.utils.validation.LoginValidation;
 
+@ExtendWith(MockitoExtension.class)
 class MessageServiceIntegrationTest {
 	
 	private LoginValidation fValidation;
@@ -21,8 +24,8 @@ class MessageServiceIntegrationTest {
 	@Mock
 	private LoginRepository fLoginRepo;
 	
-	private MessageService fMsgServ;
 	
+	private MessageService fMsgServ;	
 	
 
 	@BeforeAll
@@ -36,7 +39,7 @@ class MessageServiceIntegrationTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		fValidation = new LoginValidation();
-		fMsgServ = new MessageService(fValidation);	
+		fMsgServ = new MessageService(fValidation, fLoginRepo);	
 	}
 
 	@AfterEach
