@@ -1,7 +1,7 @@
 package com.example.demo.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verify;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -30,12 +30,12 @@ class MessageServiceUnitTest {
 	void testShouldReturnMessageXY() {
 		// Arrange
 		fLoginData = new LoginData(10);
-		when(loginRepoMock.save(fLoginData)).thenReturn(fLoginData);
 		
 		// Act
 		Message msg = msgServTO.getMessage(fLoginData);
 		
 		// Assert
+		verify(loginRepoMock).save(fLoginData);
 		assertEquals("XY", msg.getMessage());
 	}
 
