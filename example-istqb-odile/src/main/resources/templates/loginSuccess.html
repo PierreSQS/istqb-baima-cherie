@@ -7,8 +7,8 @@
     </head>
 	<body>
 		<div class="home">
-        	<h1>Bienvenue sur notre site Odile! Vous êtes senior.</h1>
-        	<h2>Vous avez été enregistré le 2020-12-12 à 17:30</h2>
+        	<h1 th:text = "|#{login.welcome} Odile! #{login.ageStatus}|">YY</h1>
+        	<h2 th:text = "|#{login.registration} 2020-12-12 à 17:30|">XX</h2>
         </div>	
 	</body>
 </html>
