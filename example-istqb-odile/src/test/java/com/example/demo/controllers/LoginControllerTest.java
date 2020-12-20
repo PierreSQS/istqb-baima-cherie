@@ -89,8 +89,8 @@ class LoginControllerTest {
 			.andExpect(model().attributeHasFieldErrors("loginData", "nom"))
 			.andExpect(model().attributeHasFieldErrors("loginData", "prenom"))
 			.andExpect(model().attributeHasFieldErrors("loginData", "age"))
-			.andExpect(view().name("loginForm"))
-			.andDo(print());
+			.andExpect(view().name("loginForm"));
+//			.andDo(print());
 	}
 	
 	@Test
