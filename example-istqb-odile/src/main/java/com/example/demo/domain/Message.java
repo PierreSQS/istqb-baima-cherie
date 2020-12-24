@@ -6,12 +6,19 @@ import lombok.Data;
 public class Message {
 
 	private Integer Id;
-	private String message;
+	private String userName;
+	private String ageStatus;
+	private String loginDate;
+	private String loginTime;
 
-	public Message(Integer id, String message) {
+	public Message() {
+		super();
+	}
+
+	public Message(Integer id, String userName) {
 		super();
 		Id = id;
-		this.message = message;
+		this.userName = userName;
 	}
 
 }

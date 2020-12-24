@@ -32,11 +32,11 @@ class MessageServiceUnitTest {
 		fLoginData = new LoginData(10);
 		
 		// Act
-		Message msg = msgServTO.getMessage(fLoginData);
+		Message msg = msgServTO.processLoginData(fLoginData);
 		
 		// Assert
 		verify(loginRepoMock).save(fLoginData);
-		assertEquals("XY", msg.getMessage());
+		assertEquals("XY", msg.getUserName());
 	}
 
 }

@@ -20,6 +20,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.example.demo.persistence.LoginRepository;
+import com.example.demo.services.MessageService;
 
 @WebMvcTest(controllers = {LoginController.class})
 class LoginControllerTest {
@@ -29,6 +30,9 @@ class LoginControllerTest {
 	
 	@MockBean
 	LoginRepository loginRepo;
+	
+	@MockBean
+	MessageService msgServ;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -58,7 +62,7 @@ class LoginControllerTest {
 	// The test is working because there is no @Not empty
 	// validation on the fields
 	@Test
-	void testSubmitLoginFormWithoutParamsPASS() throws Exception {
+	void testSubmitLoginFormWithoutParamsMissingPASS() throws Exception {
 		mockMvc.perform(post("/login"))
 			.andExpect(status().is3xxRedirection())
 			.andExpect(model().hasNoErrors())
@@ -67,7 +71,7 @@ class LoginControllerTest {
 		}
 
 	@Test
-	void testSubmitLoginFormWithParamsPASS() throws Exception {
+	void testSubmitLoginFormWithParamsCorrectPASS() throws Exception {
 		mockMvc.perform(post("/login")
 				.param("prenom", "Odile")
 				.param("nom", "Baima")
@@ -79,7 +83,7 @@ class LoginControllerTest {
 	}
 	
 	@Test
-	void testSubmitLoginFormWithParamsFAIL() throws Exception {
+	void testSubmitLoginFormWithParamsWrongFAIL() throws Exception {
 		mockMvc.perform(post("/login")
 				.param("prenom", "Odil")
 				.param("nom", "Baim")

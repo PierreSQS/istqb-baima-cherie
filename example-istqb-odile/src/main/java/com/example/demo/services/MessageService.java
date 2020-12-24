@@ -1,5 +1,7 @@
 package com.example.demo.services;
 
+import java.time.LocalDateTime;
+
 import org.springframework.stereotype.Service;
 
 import com.example.demo.domain.Message;
@@ -33,28 +35,40 @@ public class MessageService {
 		this.validation = validation;
 	}
 
-	public Message getMessage(LoginData pLoginData) {
+	public Message processLoginData(LoginData pLoginData) {
 		String ageStatus = validation.ageValidation(pLoginData.getAge());
 		Message returnedMsg = null;
+		int msgIndex = 0;
 		switch (ageStatus) {
 		case "MINEUR" :
-			returnedMsg = new Message(1, "XY");	
+			msgIndex = 1;
 			break;
 
 		case "ADULTE" :
-			returnedMsg = new Message(2, "AB");
+			msgIndex = 2;
 			break;
 
 		case "SENIOR" :
-			returnedMsg = new Message(3, "CD");
+			msgIndex = 3;
 			break;
 
 		default:
-			returnedMsg = new Message(4, "FG");
+			msgIndex = 4;
 			break;
 		}
 		
+		returnedMsg = new Message(msgIndex, pLoginData.getNom());		
+		returnedMsg.setAgeStatus(ageStatus);
+		LocalDateTime today = LocalDateTime.now();
+		pLoginData.setLoggedAt(today);
+		
+		String loginDate = today.toLocalDate().toString();
+		String loginTime = today.toLocalTime().toString();
+		
 		loginRepo.save(pLoginData);
+		
+		returnedMsg.setLoginDate(loginDate);
+		returnedMsg.setLoginDate(loginTime);
 		return returnedMsg;
 	
 	}

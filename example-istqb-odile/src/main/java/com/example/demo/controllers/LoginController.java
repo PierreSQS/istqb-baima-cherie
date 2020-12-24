@@ -14,6 +14,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.example.demo.entities.LoginData;
 import com.example.demo.persistence.LoginRepository;
+import com.example.demo.services.MessageService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,9 +22,16 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class LoginController implements WebMvcConfigurer{
 	
-	@Autowired
 	private LoginRepository loginRepo;
 	
+	private MessageService msgServ;
+	
+	public LoginController(LoginRepository loginRepo, MessageService msgServ) {
+		super();
+		this.loginRepo = loginRepo;
+		this.msgServ = msgServ;
+	}
+
 	// for any redirection a Handler should be implemented
 	// this is a way to do it without a Handler-Method
 	@Override
@@ -42,9 +50,13 @@ public class LoginController implements WebMvcConfigurer{
 			return "loginForm";
 		}
 		
+		// TODO to remove. The Bussiness logic should be shifted to the Message-Service!!!
 		LocalDateTime today = LocalDateTime.now();
 		pLogin.setLoggedAt(today);
+		
 		loginRepo.save(pLogin);
+//		msgServ.
+
 		log.info("redirecting to /loginSuccess");
 		
 		return "redirect:/loginOk";
