@@ -68,7 +68,7 @@ public class MessageService {
 		loginRepo.save(pLoginData);
 		
 		returnedMsg.setLoginDate(loginDate);
-		returnedMsg.setLoginDate(loginTime);
+		returnedMsg.setLoginTime(loginTime);
 		return returnedMsg;
 	
 	}

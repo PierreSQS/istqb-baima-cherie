@@ -3,6 +3,9 @@ package com.example.demo.services;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +30,7 @@ class MessageServiceUnitTest {
 	private LoginRepository loginRepoMock;
 
 	@Test
-	void testShouldReturnMessageXY() {
+	void testShouldReturnMessageWithAgeMINEUR() {
 		// Arrange
 		fLoginData = new LoginData(10);
 		
@@ -36,7 +39,24 @@ class MessageServiceUnitTest {
 		
 		// Assert
 		verify(loginRepoMock).save(fLoginData);
-		assertEquals("XY", msg.getUserName());
+		assertEquals("MINEUR", msg.getAgeStatus());
+	}
+	
+	@Test
+	void testShouldReturnMessageWithNameAndAgeSeniorAndDateToday() {
+		// Arrange
+		fLoginData = new LoginData(60);
+		fLoginData.setNom("Mongonnam");
+		fLoginData.setLoggedAt(LocalDateTime.now());
+		
+		// Act
+		Message msg = msgServTO.processLoginData(fLoginData);
+		
+		// Assert
+		verify(loginRepoMock).save(fLoginData);
+		assertEquals("SENIOR", msg.getAgeStatus());
+		assertEquals("Mongonnam", msg.getUserName());
+		assertEquals(LocalDate.now().toString(), msg.getLoginDate());		
 	}
 
 }
