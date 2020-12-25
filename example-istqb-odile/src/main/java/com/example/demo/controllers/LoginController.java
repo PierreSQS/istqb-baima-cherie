@@ -22,13 +22,10 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class LoginController implements WebMvcConfigurer{
 	
-	private LoginRepository loginRepo;
-	
 	private MessageService msgServ;
 	
 	public LoginController(LoginRepository loginRepo, MessageService msgServ) {
 		super();
-		this.loginRepo = loginRepo;
 		this.msgServ = msgServ;
 	}
 
@@ -50,12 +47,7 @@ public class LoginController implements WebMvcConfigurer{
 			return "loginForm";
 		}
 		
-		// TODO to remove. The Bussiness logic should be shifted to the Message-Service!!!
-		LocalDateTime today = LocalDateTime.now();
-		pLogin.setLoggedAt(today);
-		
-		loginRepo.save(pLogin);
-//		msgServ.
+		msgServ.processLoginData(pLogin);
 
 		log.info("redirecting to /loginSuccess");
 		
