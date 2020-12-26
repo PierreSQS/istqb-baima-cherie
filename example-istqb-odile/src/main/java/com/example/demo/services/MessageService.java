@@ -14,10 +14,6 @@ public class MessageService {
 
 	private LoginRepository loginRepo;
 	
-	public MessageService() {
-		
-	}
-	
 	public MessageService(LoginRepository loginRepo) {
 		super();
 		this.loginRepo = loginRepo;
