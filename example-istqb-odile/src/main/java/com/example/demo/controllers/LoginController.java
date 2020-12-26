@@ -3,11 +3,11 @@ package com.example.demo.controllers;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.example.demo.domain.Message;
@@ -28,11 +28,9 @@ public class LoginController implements WebMvcConfigurer{
 		this.msgServ = msgServ;
 	}
 
-	// for any redirection a Handler should be implemented
-	// this is a way to do it without a Handler-Method
-	@Override
-	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addViewController("/loginOk").setViewName("loginSuccess");
+	@GetMapping("loginOk")
+	public String showLoginSuccess(@ModelAttribute Message message) {
+		return "loginSuccess";
 	}
 
 	@GetMapping("/login")
@@ -41,16 +39,17 @@ public class LoginController implements WebMvcConfigurer{
 	}
 	
 	@PostMapping("/login")
-	public String submitLoginForm(@Valid LoginData pLogin, Errors error, @ModelAttribute Message message) {
+	public String submitLoginForm(@Valid LoginData pLogin, Errors error, Model model) {
 		if (error.hasErrors()) {
 			return "loginForm";
 		}
 		
-		message = msgServ.processLoginData(pLogin);
+		Message msg = msgServ.processLoginData(pLogin);
 
-		log.info("the received msg: {}", message);
-		log.info("redirecting to /loginSuccess");
+		log.info("the received msg: {}", msg);
+		log.info("redirecting to /loginOk");
 		
+		model.addAttribute("message", msg);
 		return "redirect:/loginOk";
 	}
 
