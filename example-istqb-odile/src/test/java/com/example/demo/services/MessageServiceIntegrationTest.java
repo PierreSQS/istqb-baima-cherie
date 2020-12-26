@@ -14,12 +14,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.example.demo.domain.Message;
 import com.example.demo.entities.LoginData;
 import com.example.demo.persistence.LoginRepository;
-import com.example.demo.utils.validation.LoginValidation;
 
 @ExtendWith(MockitoExtension.class)
 class MessageServiceIntegrationTest {
-	
-	private LoginValidation fValidation;
 	
 	@Mock
 	private LoginRepository fLoginRepo;
@@ -38,8 +35,7 @@ class MessageServiceIntegrationTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		fValidation = new LoginValidation();
-		fMsgServ = new MessageService(fValidation, fLoginRepo);	
+		fMsgServ = new MessageService(fLoginRepo);	
 	}
 
 	@AfterEach

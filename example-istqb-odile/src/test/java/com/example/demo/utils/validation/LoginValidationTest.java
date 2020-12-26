@@ -8,15 +8,10 @@ import com.example.demo.domain.AgeStatus;
 
 class LoginValidationTest {
 	
-	private LoginValidation validation;
-	
-	
-
 	@Test
 	void testAgeValidation() {
-		validation = new LoginValidation();
 		
-		String recvMsg = validation.ageValidation(8);
+		String recvMsg = LoginValidation.ageValidation(8);
 		
 		String expMsg = AgeStatus.MINEUR.toString();
 		

@@ -6,7 +6,7 @@ import static com.example.demo.domain.AgeStatus.SENIOR;
 
 public class LoginValidation {
 	
-	public String ageValidation(int age) {
+	public static String ageValidation(int age) {
 		
 		if (age < 18) {
 			//return "Désolé votre âge ne vous permet pas d'acceder à ce site";
