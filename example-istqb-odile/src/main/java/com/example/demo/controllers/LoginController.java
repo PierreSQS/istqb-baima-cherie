@@ -5,10 +5,12 @@ import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.example.demo.domain.Message;
 import com.example.demo.entities.LoginData;
 import com.example.demo.persistence.LoginRepository;
 import com.example.demo.services.MessageService;
@@ -39,13 +41,14 @@ public class LoginController implements WebMvcConfigurer{
 	}
 	
 	@PostMapping("/login")
-	public String submitLoginForm(@Valid LoginData pLogin, Errors error) {
+	public String submitLoginForm(@Valid LoginData pLogin, Errors error, @ModelAttribute Message message) {
 		if (error.hasErrors()) {
 			return "loginForm";
 		}
 		
-		msgServ.processLoginData(pLogin);
+		message = msgServ.processLoginData(pLogin);
 
+		log.info("the received msg: {}", message);
 		log.info("redirecting to /loginSuccess");
 		
 		return "redirect:/loginOk";
