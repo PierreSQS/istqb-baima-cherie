@@ -46,14 +46,14 @@ class MessageServiceIntegrationTest {
 	void testMessageForJuniors() {
 		LoginData login = new LoginData(10);
 		Message msg = fMsgServ.processLoginData(login);
-		assertEquals("XY", msg.getUserName());
+		assertEquals("MINEUR", msg.getAgeStatus());
 	}
 
 	@Test
 	void testMessageForAdults() {
 		LoginData login = new LoginData(30);
 		Message msg = fMsgServ.processLoginData(login);
-		assertEquals("AB", msg.getUserName());
+		assertEquals("ADULTE", msg.getAgeStatus());
 	}
 
 }
