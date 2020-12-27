@@ -41,7 +41,7 @@ public class MessageService {
 			break;
 		}
 		
-		returnedMsg = new Message(msgIndex, pLoginData.getNom());		
+		returnedMsg = new Message(msgIndex, pLoginData.getPrenom());		
 		returnedMsg.setAgeStatus(ageStatus);
 		LocalDateTime today = LocalDateTime.now();
 		pLoginData.setLoggedAt(today);

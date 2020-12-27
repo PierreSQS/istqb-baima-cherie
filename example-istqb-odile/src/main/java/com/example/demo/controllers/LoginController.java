@@ -8,18 +8,19 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.example.demo.domain.Message;
 import com.example.demo.entities.LoginData;
-import com.example.demo.persistence.LoginRepository;
 import com.example.demo.services.MessageService;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-public class LoginController implements WebMvcConfigurer{
+@SessionAttributes("message")
+public class LoginController {
 	
 	private MessageService msgServ;
 	
@@ -27,14 +28,20 @@ public class LoginController implements WebMvcConfigurer{
 		super();
 		this.msgServ = msgServ;
 	}
+	
+	@ModelAttribute("message")
+	public Message message() {
+		return new Message();
+	}
 
 	// Since we want to get the processed Message, we have to
 	// implement the logic and replace the ViewController
 	@GetMapping("loginOk")
-	public String showLoginSuccess(@ModelAttribute Message message, Model model) {
+	public String showLoginSuccess(@ModelAttribute Message message, Model model, SessionStatus status) {
 		
-		log.info("received Message: {}", message);
+		log.info("processed Message: {}", message);
 		model.addAttribute("message", message);
+		status.setComplete();
 		return "loginSuccess";
 	}
 	
@@ -45,12 +52,12 @@ public class LoginController implements WebMvcConfigurer{
 	}
 	
 	@PostMapping("/login")
-	public String submitLoginForm(@Valid LoginData pLogin, Errors error, Model model) {
+	public String submitLoginForm(@Valid LoginData pLogin, Errors error, Model model, @ModelAttribute Message msg) {
 		if (error.hasErrors()) {
 			return "loginForm";
 		}
 		
-		Message msg = msgServ.processLoginData(pLogin);
+		msg = msgServ.processLoginData(pLogin);
 
 		log.info("the received msg: {}", msg);
 		log.info("redirecting to /loginOk");
