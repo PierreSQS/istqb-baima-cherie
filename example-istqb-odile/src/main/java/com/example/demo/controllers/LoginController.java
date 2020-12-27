@@ -8,7 +8,6 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.example.demo.domain.Message;
@@ -24,17 +23,19 @@ public class LoginController implements WebMvcConfigurer{
 	
 	private MessageService msgServ;
 	
-	public LoginController(LoginRepository loginRepo, MessageService msgServ) {
+	public LoginController(MessageService msgServ) {
 		super();
 		this.msgServ = msgServ;
 	}
 
-	// for any redirection a Handler should be implemented
-	// this is a way to do it without a Handler-Method
-	@Override
-	public void addViewControllers(ViewControllerRegistry registry) {
-		log.info("Entering ViewController");
-		registry.addViewController("/loginOk").setViewName("loginSuccess");
+	// Since we want to get the processed Message, we have to
+	// implement the logic and replace the ViewController
+	@GetMapping("loginOk")
+	public String showLoginSuccess(@ModelAttribute Message message, Model model) {
+		
+		log.info("received Message: {}", message);
+		model.addAttribute("message", message);
+		return "loginSuccess";
 	}
 	
 	
