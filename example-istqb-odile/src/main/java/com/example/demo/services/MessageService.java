@@ -2,6 +2,7 @@ package com.example.demo.services;
 
 import java.time.LocalDateTime;
 
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.domain.Message;
@@ -10,6 +11,7 @@ import com.example.demo.persistence.LoginRepository;
 import com.example.demo.utils.validation.LoginValidation;
 
 @Service
+@Primary
 public class MessageService {
 
 	private LoginRepository loginRepo;
