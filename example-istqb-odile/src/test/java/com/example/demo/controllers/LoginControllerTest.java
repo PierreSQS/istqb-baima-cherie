@@ -29,9 +29,6 @@ class LoginControllerTest {
 	private MockMvc mockMvc;
 	
 	@MockBean
-	LoginRepository loginRepo;
-	
-	@MockBean
 	MessageService msgServ;
 
 	@BeforeAll
