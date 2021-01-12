@@ -6,9 +6,13 @@
         <meta charset="utf-8" />
     </head>
 	<body>
-		<div class="home">
+		<div class="home" th:if="${not #strings.equals(message.ageStatus, 'MINEUR')}">
         	<h1 th:text = "|#{login.welcome} ${message.userName} #{login.ageStatus} ${message.ageStatus} !|">YY</h1>
         	<h2 th:text = "|#{login.registration} ${message.loginDate} #{logged.at} ${message.loginTime}|">XX</h2>
         </div>	
+		<div class="home" th:if="${#strings.equals(message.ageStatus, 'MINEUR')}">
+        	<h1 th:text = "|Désolé ${message.userName} #{login.ageStatus} ${message.ageStatus} !|">ZZ</h1>
+         	<h2>Vous ne pouvez donc pas être enregistré !</h2>
+       </div>	
 	</body>
 </html>
