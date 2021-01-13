@@ -13,6 +13,9 @@
 		<div class="home" th:if="${#strings.equals(message.ageStatus, 'MINEUR')}">
         	<h1 th:text = "|Désolé ${message.userName} #{login.ageStatus} ${message.ageStatus} !|">ZZ</h1>
          	<h2 th:text = "#{login.notAllowed}">AAA</h2>
-       </div>	
+       </div>
+       <div class=banner>
+        	<a th:href="@{/login}" id="home" th:text="#{login.again}">BBB</a>
+        </div>	
 	</body>
 </html>
